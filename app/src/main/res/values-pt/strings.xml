@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CMProjeto</string>
+    <string name="appName">Your Smart City</string>
+    <string name="user">Utilizador</string>
+    <string name="password">Palavra-passe</string>
+    <string name="login">Entrar</string>
+    <string name="notes">Notas</string>
+    <string name="title_activity_notes">Página Notas</string>
+</resources>
