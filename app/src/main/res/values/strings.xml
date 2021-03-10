@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CMProjeto</string>
+    <string name="appName">Your Smart City</string>
+    <string name="user">User</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="notes">Notes</string>
+    <string name="title_activity_notes">NotesActivity</string>
 </resources>
