@@ -9,13 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Add_note"
+            android:parentActivityName=".NotesActivity"
+            android:label="@string/addNote"></activity>
         <activity
             android:name=".NotesActivity"
-            android:label="@string/title_activity_notes"
-            android:theme="@style/AppTheme"
+            android:label="@string/notes"
             android:parentActivityName=".MainActivity"
-            ></activity>
-        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
