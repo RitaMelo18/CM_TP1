@@ -10,4 +10,7 @@
     <string name="addNote">Adicionar Nota</string>
     <string name="save">Guardar</string>
     <string name="boxempty">A caixa está vazia</string>
+    <string name="update">Atualizar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="editnote">Editar Nota</string>
 </resources>

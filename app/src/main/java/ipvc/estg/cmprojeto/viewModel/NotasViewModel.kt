@@ -22,7 +22,7 @@ class NotasViewModel(application: Application) : AndroidViewModel(application) {
     init {
         val notasDao = NotasDB.getDatabase(application, viewModelScope).notasDao()
         repository = NotasRepository(notasDao)
-        allNotas = repository.allCities
+        allNotas = repository.allNotas
     }
 
     /**
@@ -31,4 +31,14 @@ class NotasViewModel(application: Application) : AndroidViewModel(application) {
     fun insert(nota: Notas) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(nota)
     }
+
+    fun editNote(nota: Notas) = viewModelScope.launch {
+        repository.editNote(nota)
+    }
+
+    fun deleteNoteById(id: Int?) = viewModelScope.launch {
+        repository.deleteNoteById(id)
+
+    }
+
 }

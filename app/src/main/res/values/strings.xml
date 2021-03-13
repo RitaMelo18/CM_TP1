@@ -9,4 +9,7 @@
     <string name="addNote">Add Note</string>
     <string name="save">Save</string>
     <string name="boxempty">The box is empty</string>
+    <string name="update">Update</string>
+    <string name="cancel">Cancel</string>
+    <string name="editnote">Edit Note</string>
 </resources>

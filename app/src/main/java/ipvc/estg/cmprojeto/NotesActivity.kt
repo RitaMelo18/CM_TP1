@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +15,10 @@ import ipvc.estg.cmprojeto.adapters.NotasAdapter
 import ipvc.estg.cmprojeto.entidade.Notas
 import ipvc.estg.cmprojeto.viewModel.NotasViewModel
 
+const val  PARAM_1= "PARAM1_NAME"
+
 class NotesActivity : AppCompatActivity() {
+
 
     private lateinit var notasViewModel: NotasViewModel
     private val newWordActivityRequestCode = 1
@@ -25,7 +29,7 @@ class NotesActivity : AppCompatActivity() {
 
         // recycler view
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = NotasAdapter(this)
+        val adapter = NotasAdapter(this, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -62,5 +66,16 @@ class NotesActivity : AppCompatActivity() {
                 R.string.boxempty,
                 Toast.LENGTH_LONG).show()
         }
+    }
+
+    fun updateNote(view: View) {
+
+        var intent = Intent(this, Edit_note::class.java).apply{}
+        startActivity(intent)
+    }
+
+    fun delete(id : Int?){
+        notasViewModel.deleteNoteById(id)
+
     }
 }
