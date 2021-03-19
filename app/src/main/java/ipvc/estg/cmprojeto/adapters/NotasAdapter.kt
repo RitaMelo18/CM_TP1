@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ipvc.estg.cmprojeto.Edit_note
@@ -31,7 +32,7 @@ class NotasAdapter internal constructor(
     class NotaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val notaItemView: TextView = itemView.findViewById(R.id.nota)
         val descricao: TextView = itemView.findViewById(R.id.desc)
-        val edit : ImageButton = itemView.findViewById(R.id.edit)
+        val edit : LinearLayout = itemView.findViewById(R.id.edit)
         val delete : ImageButton = itemView.findViewById(R.id.delete)
 
     }

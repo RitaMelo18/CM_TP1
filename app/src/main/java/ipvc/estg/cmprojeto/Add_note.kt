@@ -22,17 +22,34 @@ class Add_note : AppCompatActivity() {
         descripText = findViewById(R.id.insertDescription)
 
         val button = findViewById<Button>(R.id.button_save)
-        button.setOnClickListener {
-            val replyIntent = Intent()
-            if (TextUtils.isEmpty(titleText.text) || TextUtils.isEmpty(descripText.text)) {
-                setResult(Activity.RESULT_CANCELED, replyIntent)
-            } else {
-                replyIntent.putExtra(EXTRA_REPLY_TITLE, titleText.text.toString())
-                replyIntent.putExtra(EXTRA_REPLY_DESC, descripText.text.toString())
-                setResult(Activity.RESULT_OK, replyIntent)
+
+        if(intent.getStringExtra(EXTRA_REPLY_TITLE).isNullOrEmpty() && intent.getStringExtra(EXTRA_REPLY_DESC).isNullOrEmpty()){
+            button.setOnClickListener {
+                val replyIntent = Intent()
+
+                if(TextUtils.isEmpty((titleText.text)) || TextUtils.isEmpty((descripText.text))){
+
+                    if(TextUtils.isEmpty((titleText.text)) && !TextUtils.isEmpty((descripText.text))){
+                        titleText.error = getString(R.string.titlebox)
+                    }
+                    if(!TextUtils.isEmpty((titleText.text)) && TextUtils.isEmpty((descripText.text))){
+                        descripText.error = getString(R.string.descriptionbox)
+                    }
+                    if(TextUtils.isEmpty((titleText.text)) && TextUtils.isEmpty((descripText.text))){
+                        titleText.error = getString(R.string.titlebox)
+                        descripText.error = getString(R.string.descriptionbox)
+                    }
+                } else {
+
+                    replyIntent.putExtra(EXTRA_REPLY_TITLE, titleText.text.toString())
+                    replyIntent.putExtra(EXTRA_REPLY_DESC, descripText.text.toString())
+                    setResult(Activity.RESULT_OK, replyIntent)
+                    finish()
+                }
+
             }
-            finish()
         }
+
     }
 
     companion object {

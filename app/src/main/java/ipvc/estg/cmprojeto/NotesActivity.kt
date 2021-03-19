@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -50,7 +51,6 @@ class NotesActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
             val ptitle = data?.getStringExtra(Add_note.EXTRA_REPLY_TITLE)
             val pdesc = data?.getStringExtra(Add_note.EXTRA_REPLY_DESC)
@@ -61,21 +61,16 @@ class NotesActivity : AppCompatActivity() {
             }
 
         } else {
-            Toast.makeText(
-                applicationContext,
-                R.string.boxempty,
-                Toast.LENGTH_LONG).show()
+           // Toast.makeText(
+             //   applicationContext,
+               // R.string.boxempty,
+                //Toast.LENGTH_LONG).show()
         }
     }
 
-    fun updateNote(view: View) {
-
-        var intent = Intent(this, Edit_note::class.java).apply{}
-        startActivity(intent)
-    }
-
     fun delete(id : Int?){
-        notasViewModel.deleteNoteById(id)
+      notasViewModel.deleteNoteById(id)
+
 
     }
 }

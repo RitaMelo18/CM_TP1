@@ -26,7 +26,7 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/addNote"
         android:src="@drawable/ic_add_black_24dp"
-        app:backgroundTint="#1D88CB"
+        app:backgroundTint="#fb8c00"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

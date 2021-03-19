@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
 import ipvc.estg.cmprojeto.adapters.DESCRICAO
@@ -36,24 +37,36 @@ class Edit_note : AppCompatActivity() {
         titulo = findViewById(R.id.updateTitle)
         descricao = findViewById(R.id.updateDescription)
 
-
         var message = intent.getIntExtra(ID, 0)
         val replyIntent = Intent()
-        if (TextUtils.isEmpty(titulo.text) || TextUtils.isEmpty(descricao.text))  {
-            setResult(Activity.RESULT_CANCELED, replyIntent)
 
-        } else {
-            val nota = Notas(id = message, titulo = titulo.text.toString(), descricao = descricao.text.toString())
+        if (TextUtils.isEmpty((titulo.text)) || TextUtils.isEmpty((descricao.text))) {
+
+            if (TextUtils.isEmpty((titulo.text)) && !TextUtils.isEmpty((descricao.text))) {
+                titulo.error = getString(R.string.titlebox)
+            }
+            if (!TextUtils.isEmpty((titulo.text)) && TextUtils.isEmpty((descricao.text))) {
+                descricao.error = getString(R.string.descriptionbox)
+            }
+            if (TextUtils.isEmpty((titulo.text)) && TextUtils.isEmpty((descricao.text))) {
+                titulo.error = getString(R.string.titlebox)
+                descricao.error = getString(R.string.descriptionbox)
+            }
+        }else {
+            val nota = Notas(
+                id = message,
+                titulo = titulo.text.toString(),
+                descricao = descricao.text.toString()
+            )
             notasViewModel.editNote(nota)
-
-
+            finish()
         }
-        finish()
+
+
     }
 
 
-    fun cancelUpdate(view: View) {
-        var intent = Intent(this, NotesActivity::class.java)
-        startActivity(intent)
-    }
+
+
+
 }

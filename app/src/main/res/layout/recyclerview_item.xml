@@ -4,6 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
     android:id="@+id/note"
     >
 
@@ -12,36 +14,36 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:orientation="horizontal"
+
         >
 
         <LinearLayout
-            android:layout_width="340dp"
-            android:layout_height="wrap_content"
+            android:layout_width="368dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:onClick="updateNote"
+            android:id="@+id/edit"
+            >
 
             <TextView
                 android:id="@+id/nota"
-                android:text="Nota"
-                android:layout_width="321dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="7dp"
-                android:layout_marginLeft="10dp"
+                android:layout_width="345dp"
+                android:layout_height="38dp"
+                android:layout_margin="5dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:padding="10dp"
-                android:textColor="#616161" />
+                android:padding="1dp"
+                android:textColor="#000000"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/desc"
-                android:text="Descrição"
-                android:layout_width="321dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="7dp"
-                android:padding="10dp"
+                android:layout_width="345dp"
+                android:layout_height="38dp"
+                android:layout_margin="5dp"
+                android:layout_marginTop="1dp"
+                android:padding="1dp"
                 android:textColor="#616161" />
 
         </LinearLayout>
@@ -51,23 +53,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageButton
-                android:background="@android:color/white"
-                android:id="@+id/edit"
-                android:layout_width="20dp"
-                android:layout_height="33dp"
-                android:layout_margin="7dp"
-                android:onClick="updateNote"
-                android:src="@drawable/ic_edit_black_24dp"
-                android:tint="#9E9E9E"
-                />
 
             <ImageButton
-                android:background="@android:color/white"
                 android:id="@+id/delete"
-                android:layout_width="20dp"
-                android:layout_height="36dp"
+                android:layout_width="wrap_content"
+                android:layout_height="86dp"
                 android:layout_margin="7dp"
+                android:background="@android:color/white"
                 android:onClick="delete"
                 android:src="@drawable/ic_delete_black_24dp"
                 android:tint="#9E9E9E" />

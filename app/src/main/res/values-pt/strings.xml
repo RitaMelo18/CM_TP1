@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CMProjeto</string>
-    <string name="appName">Your Smart City</string>
+    <string name="appName">A tua cidade inteligente</string>
     <string name="user">Utilizador</string>
     <string name="password">Palavra-passe</string>
     <string name="login">Entrar</string>
@@ -13,4 +13,8 @@
     <string name="update">Atualizar</string>
     <string name="cancel">Cancelar</string>
     <string name="editnote">Editar Nota</string>
+    <string name="Title">Título</string>
+    <string name="Desc">Descrição</string>
+    <string name="descriptionbox">Inserir descrição</string>
+    <string name="titlebox">Inserir título</string>
 </resources>
