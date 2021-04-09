@@ -17,4 +17,7 @@
     <string name="Desc">Descrição</string>
     <string name="descriptionbox">Inserir descrição</string>
     <string name="titlebox">Inserir título</string>
+    <string name="Login_Email">Insira um email</string>
+    <string name="Login_Password">Insira a palavra-passe</string>
+    <string name="Error_login">Dados inválidos</string>
 </resources>
