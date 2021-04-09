@@ -29,6 +29,7 @@ class UsersViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
     private val email:TextView = itemView.findViewById(R.id.email)
     private val password:TextView = itemView.findViewById(R.id.password)
 
+
     fun bind(user: User) {
         email.text = user.email
         password.text = user.password

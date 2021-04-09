@@ -20,4 +20,10 @@
     <string name="Login_Password">Insert a password</string>
     <string name="Error_login">Invalid data</string>
     <string name="title_activity_maps">Map</string>
+    <string name="preference_login" translatable="false">LoginSharePreferences</string>
+    <string name="LoginShared" translatable="false">loginshared</string>
+    <string name="EmailShared" translatable="false">emailshared</string>
+    <string name="Id_LoginUser" translatable="false">idloginuser</string>
+    <string name="idUser" translatable="false">iduser</string>
+
 </resources>
