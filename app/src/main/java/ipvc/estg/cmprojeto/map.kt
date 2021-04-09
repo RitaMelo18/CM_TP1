@@ -21,7 +21,7 @@ class map : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewmap)
+        /*val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewmap)
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getUsers()
 
@@ -38,7 +38,7 @@ class map : AppCompatActivity() {
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 Toast.makeText(this@map, "${t.message}", Toast.LENGTH_SHORT).show()
             }
-        })
+        })*/
     }
 
     /*fun post(view: View) {
