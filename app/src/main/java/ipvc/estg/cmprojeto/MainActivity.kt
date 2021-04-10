@@ -90,11 +90,10 @@ class MainActivity : AppCompatActivity() {
                     with(sharedPref.edit()){
                         putBoolean(getString(R.string.LoginShared), true)
                         putString(getString(R.string.EmailShared), "${emailInserido.text}")
-                        putString(getString(R.string.Id_LoginUser), "${e.id}")
+                        putInt(getString(R.string.Id_LoginUser), e.id)
                         commit()
                         Log.d("****SHARED","${e.id}" )
                     }
-
 
                 }else if (!(emailInserido.text.toString().equals(e.email) && (passwordInserida.text.toString().equals(e.password)))){
 

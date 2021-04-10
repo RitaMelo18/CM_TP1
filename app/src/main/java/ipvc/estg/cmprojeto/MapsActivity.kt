@@ -12,6 +12,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import ipvc.estg.cmprojeto.api.EndPoints
@@ -39,6 +41,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getPontos()
         var position: LatLng
+        val sharedPref: SharedPreferences = getSharedPreferences(
+            getString(R.string.preference_login), Context.MODE_PRIVATE
+        )
+
+        Toast.makeText(this@MapsActivity, getString(R.string.Id_LoginUser), Toast.LENGTH_SHORT).show()
 
         call.enqueue(object : Callback<List<Pontos>>{
             override fun onResponse(call: Call<List<Pontos>>, response: Response<List<Pontos>>) {
@@ -46,11 +53,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                    pontos = response.body()!!
                     for(ponto in pontos){
                         position = LatLng(ponto.latitude.toString().toDouble(), ponto.longitude.toString().toDouble())
-                        mMap.addMarker(MarkerOptions()
-                            .position(position)
-                            .title(ponto.nome)
-                            .snippet(ponto.descricao)
-                        )
+                        if (ponto.id_user.equals(sharedPref.all[getString(R.string.Id_LoginUser)])){
+
+                            mMap.addMarker(MarkerOptions()
+                                .position(position)
+                                .title(ponto.nome)
+                                .snippet(ponto.descricao)
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
+
+                            )
+                        }else {
+                            mMap.addMarker(
+                                MarkerOptions()
+                                    .position(position)
+                                    .title(ponto.nome)
+                                    .snippet(ponto.descricao)
+                            )
+                        }
                     }
                 }
             }
@@ -77,7 +96,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Add a marker in Sydney and move the camera
         val zone = LatLng(41.6946, -8.83016)
         val zoomLevel = 15f
-        mMap.addMarker(MarkerOptions().position(zone).title("Marker in Sydney"))
+
        /* mMap.moveCamera(CameraUpdateFactory.newLatLng(zone))*/
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(zone, zoomLevel))
     }
