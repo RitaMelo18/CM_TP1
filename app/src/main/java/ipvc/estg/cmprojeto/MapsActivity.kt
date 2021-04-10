@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -13,11 +14,19 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import ipvc.estg.cmprojeto.api.EndPoints
+import ipvc.estg.cmprojeto.api.Pontos
+import ipvc.estg.cmprojeto.api.ServiceBuilder
+import ipvc.estg.cmprojeto.api.User
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+    private lateinit var pontos: List<Pontos>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +35,29 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getPontos()
+        var position: LatLng
+
+        call.enqueue(object : Callback<List<Pontos>>{
+            override fun onResponse(call: Call<List<Pontos>>, response: Response<List<Pontos>>) {
+                if (response.isSuccessful){
+                   pontos = response.body()!!
+                    for(ponto in pontos){
+                        position = LatLng(ponto.latitude.toString().toDouble(), ponto.longitude.toString().toDouble())
+                        mMap.addMarker(MarkerOptions()
+                            .position(position)
+                            .title(ponto.nome)
+                            .snippet(ponto.descricao)
+                        )
+                    }
+                }
+            }
+            override fun onFailure(call: Call<List<Pontos>>, t: Throwable) {
+                Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
 
 
     }
