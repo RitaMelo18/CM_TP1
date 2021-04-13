@@ -103,9 +103,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     fun logout(view: View) {
         
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Terminar sessão")
-        builder.setMessage("Deseja terminar a sessão?")
-        builder.setPositiveButton("Sim") { dialog: DialogInterface?, which: Int ->
+        builder.setTitle(R.string.Logout)
+        builder.setMessage(R.string.LogoutMessage)
+        builder.setIcon(R.drawable.ic_exit_to_app_black_24dp)
+        builder.setPositiveButton(R.string.Yes) { dialog: DialogInterface?, which: Int ->
             //Fab
             val sharedPref: SharedPreferences = getSharedPreferences(
                 getString(R.string.preference_login), Context.MODE_PRIVATE
@@ -119,7 +120,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             startActivity(intent)
         }
 
-        builder.setNegativeButton("Não") { dialog: DialogInterface?, which: Int ->}
+        builder.setNegativeButton(R.string.No) { dialog: DialogInterface?, which: Int ->}
         builder.show()
 
 
