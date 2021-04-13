@@ -9,6 +9,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MapsActivity">
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -37,13 +39,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:contentDescription="@string/addNote"
         android:src="@drawable/ic_exit_to_app_black_24dp"
         app:backgroundTint="#fb8c00"
         app:tint="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/fab1"
         app:layout_constraintEnd_toEndOf="@id/fab1"
         android:onClick="logout"/>
+
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

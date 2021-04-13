@@ -1,21 +1,20 @@
 package ipvc.estg.cmprojeto
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import ipvc.estg.cmprojeto.api.EndPoints
 import ipvc.estg.cmprojeto.api.Pontos
 import ipvc.estg.cmprojeto.api.ServiceBuilder
@@ -45,8 +44,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             getString(R.string.preference_login), Context.MODE_PRIVATE
         )
 
-        Toast.makeText(this@MapsActivity, getString(R.string.Id_LoginUser), Toast.LENGTH_SHORT).show()
-
         call.enqueue(object : Callback<List<Pontos>>{
             override fun onResponse(call: Call<List<Pontos>>, response: Response<List<Pontos>>) {
                 if (response.isSuccessful){
@@ -59,16 +56,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                 .position(position)
                                 .title(ponto.nome)
                                 .snippet(ponto.descricao)
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
 
                             )
                         }else {
                             mMap.addMarker(
-                                MarkerOptions()
-                                    .position(position)
-                                    .title(ponto.nome)
-                                    .snippet(ponto.descricao)
-                            )
+                                    MarkerOptions()
+                                        .position(position)
+                                        .title(ponto.nome)
+                                        .snippet(ponto.descricao)
+                                    )
                         }
                     }
                 }
@@ -99,10 +96,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
        /* mMap.moveCamera(CameraUpdateFactory.newLatLng(zone))*/
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(zone, zoomLevel))
+
+
     }
 
     fun logout(view: View) {
-        //Fab
+        
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Terminar sessão")
+        builder.setMessage("Deseja terminar a sessão?")
+        builder.setPositiveButton("Sim") { dialog: DialogInterface?, which: Int ->
+            //Fab
             val sharedPref: SharedPreferences = getSharedPreferences(
                 getString(R.string.preference_login), Context.MODE_PRIVATE
             )
@@ -113,7 +117,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             var intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+        }
+
+        builder.setNegativeButton("Não") { dialog: DialogInterface?, which: Int ->}
+        builder.show()
 
 
     }
+
 }
