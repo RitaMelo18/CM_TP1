@@ -25,4 +25,5 @@
     <string name="LogoutMessage">Deseja terminar a sessão?</string>
     <string name="Yes">Sim</string>
     <string name="No">Não</string>
+    <string name="Back">É necessário terminar a sessão</string>
 </resources>

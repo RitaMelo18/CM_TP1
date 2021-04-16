@@ -29,5 +29,6 @@
     <string name="LogoutMessage">Are you sure you want to logout?</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
+    <string name="Back">" Need to log out"</string>
 
 </resources>

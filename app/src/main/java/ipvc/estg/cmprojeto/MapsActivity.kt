@@ -126,4 +126,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+    override fun onBackPressed() {
+        //nothing
+        Toast.makeText(this@MapsActivity, R.string.Back, Toast.LENGTH_SHORT).show()
+    }
+
 }
