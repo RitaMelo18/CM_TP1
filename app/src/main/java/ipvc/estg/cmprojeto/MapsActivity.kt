@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -22,6 +23,13 @@ import ipvc.estg.cmprojeto.api.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.URL
+import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import com.squareup.picasso.Picasso
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -55,7 +63,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             mMap.addMarker(MarkerOptions()
                                 .position(position)
                                 .title(ponto.nome)
-                                .snippet(ponto.descricao)
+                                .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString())
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
 
                             )
@@ -64,7 +72,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                     MarkerOptions()
                                         .position(position)
                                         .title(ponto.nome)
-                                        .snippet(ponto.descricao)
+                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString())
                                     )
                         }
                     }
@@ -96,7 +104,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
        /* mMap.moveCamera(CameraUpdateFactory.newLatLng(zone))*/
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(zone, zoomLevel))
-
+        mMap.setInfoWindowAdapter(Markerwindow(this))
 
     }
 
