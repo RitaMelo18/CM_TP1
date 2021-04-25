@@ -11,9 +11,12 @@
     <RelativeLayout
         android:layout_width="295dp"
         android:layout_height="310dp"
-        android:orientation="vertical"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="55dp"
         android:background="@drawable/rounded_button"
-        android:backgroundTint="#fffafa">
+        android:backgroundTint="#fffafa"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/titulo_info"

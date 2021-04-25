@@ -29,6 +29,7 @@ import android.graphics.Bitmap
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.util.Log
 import com.squareup.picasso.Picasso
 
 
@@ -63,7 +64,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             mMap.addMarker(MarkerOptions()
                                 .position(position)
                                 .title(ponto.nome)
-                                .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString())
+                                .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia)
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
 
                             )
@@ -72,7 +73,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                     MarkerOptions()
                                         .position(position)
                                         .title(ponto.nome)
-                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString())
+                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia)
                                     )
                         }
                     }
@@ -101,12 +102,25 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Add a marker in Sydney and move the camera
         val zone = LatLng(41.6946, -8.83016)
         val zoomLevel = 15f
+        var intent = Intent(this, MainActivity::class.java)
 
        /* mMap.moveCamera(CameraUpdateFactory.newLatLng(zone))*/
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(zone, zoomLevel))
         mMap.setInfoWindowAdapter(Markerwindow(this))
 
+        //Passar a informação quando a InfoWindow é clicada
+        mMap.setOnInfoWindowClickListener { marker ->
+            val intent = Intent(this, Editar_eliminarPontos::class.java).apply{
+                putExtra("Título", marker.title)
+                putExtra("Spinnet", marker.snippet)
+            }
+            startActivity(intent)
+        }
+
+
     }
+
+
 
     fun logout(view: View) {
         
@@ -138,5 +152,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //nothing
         Toast.makeText(this@MapsActivity, R.string.Back, Toast.LENGTH_SHORT).show()
     }
+
+
 
 }

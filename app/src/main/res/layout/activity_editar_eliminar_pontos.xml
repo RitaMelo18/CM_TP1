@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="#fffafa"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="184dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tituloMarker"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="196dp"
+            android:layout_marginRight="196dp"
+            android:text="@string/Desc"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="247dp"
+            android:layout_marginRight="247dp"
+            android:text="@string/Title"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/descricaoMarker"
+            android:layout_width="344dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/textView7"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="23dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="38dp"
+            android:layout_marginRight="38dp"
+            android:fontFamily="sans-serif-light"
+            android:inputType="textAutoComplete"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/tituloMarker"
+            android:layout_width="344dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/textView4"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginRight="36dp"
+            android:fontFamily="sans-serif-light"
+            android:inputType="textAutoComplete"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/descricaoMarker"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="27dp"
+            android:layout_marginLeft="27dp"
+            android:layout_marginTop="105dp"
+            android:layout_marginEnd="256dp"
+            android:layout_marginRight="256dp"
+            android:text="Imagem"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imagemMarker"
+            android:layout_width="347dp"
+            android:layout_height="199dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="322dp"
+            android:layout_marginEnd="33dp"
+            android:layout_marginRight="33dp"
+            android:layout_marginBottom="-269dp"
+            android:adjustViewBounds="true" />
+
+        <LinearLayout
+            android:id="@+id/bottomBar2"
+            android:layout_width="336dp"
+            android:layout_height="137dp"
+            android:layout_below="@+id/imagemMarker"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="63dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginBottom="267dp"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/consultNote"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="20"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="#1D88CB"
+                android:text="Apagar"
+                android:textColor="#FAFFFFFF"
+                android:textStyle="bold"></Button>
+
+            <TextView
+                android:id="@+id/id_user_Marker"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:text=""
+                android:visibility="invisible">
+
+            </TextView>
+
+            <Button
+                android:id="@+id/AddNote"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="20"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="#1D88CB"
+                android:onClick="addNotas"
+                android:text="Editar"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"></Button>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/descricaoMarker"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="221dp"
+            android:layout_marginRight="221dp"
+            android:layout_marginBottom="207dp"
+            android:text="Tipo ocorrencia"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ocorrencia"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_below="@+id/descricaoMarker"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="196dp"
+            android:layout_marginLeft="196dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginEnd="70dp"
+            android:layout_marginRight="70dp"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -28,28 +28,29 @@ class Markerwindow(context: Context) : GoogleMap.InfoWindowAdapter {
         val id_user = view.findViewById<TextView>(R.id.utilizador)
 
 
-
-
         val strs = marker.snippet.split("+").toTypedArray() // dividir a string que contem a descricao, o url e o id do utl
 
-        nome.text = marker.title         // aplicar o TITULO
+        //Atribuir título
+        nome.text = marker.title
 
-        descricao.text = strs[0]            // aplicar a descricao
+        //Atribuir descrição
+        descricao.text = strs[0]
 
-        Picasso.get().load(strs[1]).into(foto); // definir a imagem com o url
+        //Atribuir imagem
+        Picasso.get().load(strs[1]).into(foto)
+        foto.getLayoutParams().height = 450 // ajudtar tamanho da iamgem
+        foto.getLayoutParams().width = 600
+        foto.requestLayout()
 
-
-        foto.getLayoutParams().height = 450; // ajudtar tamanho da iamgem
-        foto.getLayoutParams().width = 600;
-        foto.requestLayout();
-
-        if(strs[2].toInt() == strs[3].toInt()){     // se o utilizador que reportou a anomalia for o mesmo que tem login iniciado
+        //Verificar se o utilizador tem a opção de editar/eliminar
+        if(strs[2].toInt() == strs[3].toInt()){
             id_user.visibility = (View.VISIBLE)
             botBar.visibility = (View.VISIBLE)
-        }else{                                      // caso nao seja
-            id_user.visibility = (View.GONE)
-            botBar.visibility = (View.GONE)
+        }else{
+            id_user.visibility = (View.INVISIBLE)
+            botBar.visibility = (View.INVISIBLE)
         }
+
 
     }
 
@@ -62,6 +63,5 @@ class Markerwindow(context: Context) : GoogleMap.InfoWindowAdapter {
         rendowWindowText(marker, mWindow)
         return mWindow
     }
-
 
 }
