@@ -13,10 +13,7 @@ import android.widget.*
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import com.squareup.picasso.Picasso
-import ipvc.estg.cmprojeto.api.EditarOcorrencias
-import ipvc.estg.cmprojeto.api.EndPoints
-import ipvc.estg.cmprojeto.api.OutputPost
-import ipvc.estg.cmprojeto.api.ServiceBuilder
+import ipvc.estg.cmprojeto.api.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -126,15 +123,49 @@ class Editar_eliminarPontos : AppCompatActivity() {
                     }
                 })
             }
-
-
-
-
-
-
-
     }
 
+
+    fun eliminarOcorrencia(view: View){
+        var intent = intent
+        val titulo = intent.getStringExtra("Título")
+        val spinnet = intent.getStringExtra("Spinnet")
+
+        //Dividir o spinnet recebido que contem descrição, imagem e id's
+        val strs = spinnet.split("+").toTypedArray()
+
+        //Atribuir id
+        val idRecebido = strs[5].toInt()
+
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.eliminarOcorrencia(idRecebido)
+        var intent2 = Intent(this, MapsActivity::class.java)
+
+
+        call.enqueue(object : Callback<EliminarOcorrencias> {
+            override fun onResponse(call: Call<EliminarOcorrencias>, response: Response<EliminarOcorrencias>) {
+                if (response.isSuccessful){
+                    val e: EliminarOcorrencias = response.body()!!
+
+                    if(idRecebido == e.id){
+
+                        Toast.makeText(this@Editar_eliminarPontos, R.string.updatesuccessful, Toast.LENGTH_SHORT).show()
+                        startActivity(intent2)
+
+
+                    }else {
+                        Toast.makeText(this@Editar_eliminarPontos, R.string.ErrorupdatePoint, Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: Call<EliminarOcorrencias>, t: Throwable) {
+                //Toast.makeText(this@Editar_eliminarPontos, "${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+    }
 }
 
 

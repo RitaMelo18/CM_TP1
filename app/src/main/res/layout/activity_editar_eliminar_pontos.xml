@@ -151,7 +151,8 @@
                 android:backgroundTint="#1D88CB"
                 android:text="@string/delete"
                 android:textColor="#FAFFFFFF"
-                android:textStyle="bold"></Button>
+                android:textStyle="bold"
+                android:onClick="eliminarOcorrencia"></Button>
 
             <TextView
                 android:id="@+id/id_user_Marker"
