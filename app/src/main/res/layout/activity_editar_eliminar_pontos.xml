@@ -169,10 +169,11 @@
                 android:layout_weight="20"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="#1D88CB"
-                android:onClick="addNotas"
+                android:onClick="editarOcorrencias"
                 android:text="@string/edit"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"></Button>
+                android:textStyle="bold"
+                ></Button>
 
         </LinearLayout>
 

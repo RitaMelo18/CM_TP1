@@ -30,4 +30,6 @@
     <string name="delete">Apagar</string>
     <string name="typeOcurrencie">Tipo de ocorrência</string>
     <string name="image">Imagem</string>
+    <string name="ErrorupdatePoint">Erro ao atualiar</string>
+    <string name="updatesuccessful">Atualizado com sucesso!</string>
 </resources>

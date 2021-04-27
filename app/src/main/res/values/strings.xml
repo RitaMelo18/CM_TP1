@@ -34,5 +34,7 @@
     <string name="delete">Delete</string>
     <string name="typeOcurrencie">Type Occurrence</string>
     <string name="image">Image</string>
+    <string name="ErrorupdatePoint">Error to update</string>
+    <string name="updatesuccessful">Update Sucessful!</string>
 
 </resources>

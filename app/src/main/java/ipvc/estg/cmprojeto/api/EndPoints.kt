@@ -17,4 +17,8 @@ interface EndPoints {
     @FormUrlEncoded
     @POST("/myslim/api/utilizador")
     fun postTest(@Field("email") first: String, @Field ("password") second: String): Call<OutputPost>
+
+    @FormUrlEncoded
+    @POST("/myslim/api/editar/pontos")
+    fun editarOcorrencia(@Field("id") first: Int, @Field ("nome") second: String, @Field ("descricao") third: String): Call<EditarOcorrencias>
 }

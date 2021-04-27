@@ -56,8 +56,6 @@ class MainActivity : AppCompatActivity() {
         var intent = Intent(this, MapsActivity::class.java)
 
 
-
-
         //Validações
         if(emailInserido.text.isNullOrEmpty() || passwordInserida.text.isNullOrEmpty()){
 
