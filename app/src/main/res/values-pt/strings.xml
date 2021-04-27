@@ -26,4 +26,8 @@
     <string name="Yes">Sim</string>
     <string name="No">Não</string>
     <string name="Back">É necessário terminar a sessão</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Apagar</string>
+    <string name="typeOcurrencie">Tipo de ocorrência</string>
+    <string name="image">Imagem</string>
 </resources>

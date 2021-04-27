@@ -26,6 +26,7 @@ class Markerwindow(context: Context) : GoogleMap.InfoWindowAdapter {
         val foto = view.findViewById<ImageView>(R.id.imagem)
         val botBar = view.findViewById<LinearLayout>(R.id.bottomBar)
         val id_user = view.findViewById<TextView>(R.id.utilizador)
+        val ocorrencia = view.findViewById<TextView>(R.id.tipoOcorrencia)
 
 
         val strs = marker.snippet.split("+").toTypedArray() // dividir a string que contem a descricao, o url e o id do utl
@@ -49,6 +50,13 @@ class Markerwindow(context: Context) : GoogleMap.InfoWindowAdapter {
         }else{
             id_user.visibility = (View.INVISIBLE)
             botBar.visibility = (View.INVISIBLE)
+        }
+
+        //Atribuir tipo ocorrência
+        if(strs[4].toInt().equals(1)){
+            ocorrencia.text = "Acidente"
+        }else{
+            ocorrencia.text = "Obras"
         }
 
 
