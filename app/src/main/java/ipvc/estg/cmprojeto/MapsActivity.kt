@@ -1,9 +1,7 @@
 package ipvc.estg.cmprojeto
 
-import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,7 +27,11 @@ import android.graphics.Bitmap
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.location.Location
 import android.util.Log
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.squareup.picasso.Picasso
 
 
@@ -37,6 +39,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var pontos: List<Pontos>
+    private lateinit var lastLocation: Location
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +49,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        //inicializar fusedLocationClient
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getPontos()
@@ -98,7 +105,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
+        setUpMap()
         // Add a marker in Sydney and move the camera
         val zone = LatLng(41.6946, -8.83016)
         val zoomLevel = 15f
@@ -120,6 +127,25 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+    private fun setUpMap() {
+        if(ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
+            return
+        }else{
+            mMap.isMyLocationEnabled = true
+
+            fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+                if(location != null){
+                    lastLocation = location
+                    Toast.makeText(this@MapsActivity, lastLocation.toString(), Toast.LENGTH_SHORT).show()
+                    val currentLatLng = LatLng(location.latitude, location.longitude)
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
+                }
+            }
+        }
+    }
 
 
     fun logout(view: View) {
