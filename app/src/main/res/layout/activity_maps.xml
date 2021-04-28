@@ -31,7 +31,8 @@
         app:backgroundTint="#fb8c00"
         app:tint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="adicionarOcorrencia"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

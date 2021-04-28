@@ -60,7 +60,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 super.onLocationResult(p0)
                 lastLocation = p0.lastLocation
                 var loc = LatLng(lastLocation.latitude, lastLocation.longitude)
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15.0f))
+                //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15.0f))
                 Log.d("***AQUI", "nova localização - " + loc.latitude + "-" + loc.longitude)
             }
         }
@@ -153,7 +153,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     lastLocation = location
                     Toast.makeText(this@MapsActivity, lastLocation.toString(), Toast.LENGTH_SHORT).show()
                     val currentLatLng = LatLng(location.latitude, location.longitude)
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
+                    //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
                 }
             }
         }
@@ -217,6 +217,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onBackPressed() {
         //nothing
         Toast.makeText(this@MapsActivity, R.string.Back, Toast.LENGTH_SHORT).show()
+    }
+
+    fun adicionarOcorrencia(view: View) {
+
+        //Abrir o shared preferences
+        val sharedPref: SharedPreferences = getSharedPreferences(
+            getString(R.string.preference_login), Context.MODE_PRIVATE
+        )
+        //Utilizador com sessão iniciada
+        var idUtilizadorLogado = sharedPref.all[getString(R.string.Id_LoginUser)]
+
+        val intent = Intent(this, AdicionarOcorrencias::class.java).apply {
+            putExtra("id_user", idUtilizadorLogado.toString())
+        }
+        startActivity(intent)
+
     }
 
 
