@@ -32,4 +32,8 @@
     <string name="image">Imagem</string>
     <string name="ErrorupdatePoint">Erro ao atualiar</string>
     <string name="updatesuccessful">Atualizado com sucesso!</string>
+    <string name="deletesucessful">Eliminado com sucesso!</string>
+    <string name="Errordelete">Erro ao eliminar</string>
+    <string name="DeletePoint">Tem a certeza que deseja eliminar este ponto?</string>
+    <string name="deletepointtitle">Apagar ponto</string>
 </resources>
