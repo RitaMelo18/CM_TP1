@@ -30,8 +30,7 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.location.Location
 import android.util.Log
 import androidx.core.app.ActivityCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
 import com.squareup.picasso.Picasso
 
 
@@ -41,6 +40,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var pontos: List<Pontos>
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private lateinit var  locationCallback: LocationCallback
+    private lateinit var locationRequest: LocationRequest
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +54,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         //inicializar fusedLocationClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        locationCallback = object : LocationCallback(){
+            override fun onLocationResult(p0: LocationResult) {
+                super.onLocationResult(p0)
+                lastLocation = p0.lastLocation
+                var loc = LatLng(lastLocation.latitude, lastLocation.longitude)
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15.0f))
+                Log.d("***AQUI", "nova localização - " + loc.latitude + "-" + loc.longitude)
+            }
+        }
 
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getPontos()
@@ -91,7 +103,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
-
+    createLocationRequest()
     }
 
     /**
@@ -145,6 +157,34 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             }
         }
+    }
+
+    private fun startLocationUpdates() {
+        if(ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),1)
+            return
+        }
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null )
+    }
+
+    private fun createLocationRequest(){
+        locationRequest = LocationRequest()
+        locationRequest.interval = 10000
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+    }
+
+    override fun onPause(){
+        super.onPause()
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+        Log.d("***AQUI", "onPause - removeLocationUpdates")
+    }
+
+    public override fun onResume(){
+        super.onResume()
+        startLocationUpdates()
+        Log.d("***AQUI", "onResume - startLocationUpdates")
     }
 
 
