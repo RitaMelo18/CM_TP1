@@ -25,4 +25,14 @@ interface EndPoints {
     @FormUrlEncoded
     @POST("/myslim/api/pontos/delete/ponto")
     fun eliminarOcorrencia(@Field("id") first: Int): Call<EliminarOcorrencias>
+
+    @FormUrlEncoded
+    @POST("/myslim/api/pontos")
+    fun adicionarOcorrencia(@Field("latitude") primeiro: String,
+                            @Field("longitude") segundo: String,
+                            @Field("nome") terceiro: String,
+                            @Field("descricao") quarto: String,
+                            @Field("foto") quinto: String,
+                            @Field("id_user") sexto: Int,
+                            @Field("id_ocorrencia") setimo: Int): Call<Pontos_adicionar>
 }

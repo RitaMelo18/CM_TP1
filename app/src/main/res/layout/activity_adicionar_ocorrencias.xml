@@ -211,6 +211,22 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/nomeImagem"
+            android:layout_width="106dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/add_photo"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="155dp"
+            android:layout_marginLeft="155dp"
+            android:layout_marginEnd="141dp"
+            android:layout_marginRight="141dp"
+            android:layout_marginBottom="166dp"
+            />
+
     </RelativeLayout>
 
 </LinearLayout>
