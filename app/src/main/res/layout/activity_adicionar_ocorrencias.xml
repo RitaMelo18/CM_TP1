@@ -139,6 +139,7 @@
             android:layout_marginRight="167dp"
             android:layout_marginBottom="-54dp"
             android:background="@null"
+            android:onClick="chooseImage"
             android:src="@drawable/ic_add_a_photo_black_24dp" />
 
         <LinearLayout
@@ -161,13 +162,12 @@
 
 
             <Button
-                android:id="@+id/consultNote"
+                android:id="@+id/addOcorrencia"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_weight="20"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="#1D88CB"
-                android:onClick="eliminarOcorrencia"
                 android:text="@string/save"
                 android:textColor="#FAFFFFFF"
                 android:textStyle="bold"></Button>

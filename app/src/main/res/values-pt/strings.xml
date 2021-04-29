@@ -36,4 +36,6 @@
     <string name="Errordelete">Erro ao eliminar</string>
     <string name="DeletePoint">Tem a certeza que deseja eliminar este ponto?</string>
     <string name="deletepointtitle">Apagar ponto</string>
+    <string name="accidents">Acidentes</string>
+    <string name="construction">Obras</string>
 </resources>

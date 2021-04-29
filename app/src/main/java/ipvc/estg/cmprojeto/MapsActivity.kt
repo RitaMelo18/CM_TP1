@@ -75,7 +75,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         call.enqueue(object : Callback<List<Pontos>>{
             override fun onResponse(call: Call<List<Pontos>>, response: Response<List<Pontos>>) {
                 if (response.isSuccessful){
-                   pontos = response.body()!!
+                    pontos = response.body()!!
                     for(ponto in pontos){
                         position = LatLng(ponto.latitude.toString().toDouble(), ponto.longitude.toString().toDouble())
                         if (ponto.id_user.equals(sharedPref.all[getString(R.string.Id_LoginUser)])){
@@ -89,11 +89,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             )
                         }else {
                             mMap.addMarker(
-                                    MarkerOptions()
-                                        .position(position)
-                                        .title(ponto.nome)
-                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble())
-                                    )
+                                MarkerOptions()
+                                    .position(position)
+                                    .title(ponto.nome)
+                                    .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble())
+                            )
                         }
                     }
                 }
@@ -103,7 +103,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
-    createLocationRequest()
+        createLocationRequest()
     }
 
     /**
@@ -123,7 +123,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val zoomLevel = 15f
         var intent = Intent(this, MainActivity::class.java)
 
-       /* mMap.moveCamera(CameraUpdateFactory.newLatLng(zone))*/
+        /* mMap.moveCamera(CameraUpdateFactory.newLatLng(zone))*/
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(zone, zoomLevel))
         mMap.setInfoWindowAdapter(Markerwindow(this))
 
@@ -151,7 +151,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
                 if(location != null){
                     lastLocation = location
-                    Toast.makeText(this@MapsActivity, lastLocation.toString(), Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this@MapsActivity, lastLocation.toString(), Toast.LENGTH_SHORT).show()
                     val currentLatLng = LatLng(location.latitude, location.longitude)
                     //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
                 }
@@ -189,7 +189,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     fun logout(view: View) {
-        
+
         val builder = AlertDialog.Builder(this)
         builder.setTitle(R.string.Logout)
         builder.setMessage(R.string.LogoutMessage)
@@ -230,8 +230,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val intent = Intent(this, AdicionarOcorrencias::class.java).apply {
             putExtra("id_user", idUtilizadorLogado.toString())
+            putExtra("localizacao", LatLng(lastLocation.latitude, lastLocation.longitude))
         }
         startActivity(intent)
+
 
     }
 
