@@ -170,7 +170,8 @@
                 android:backgroundTint="#1D88CB"
                 android:text="@string/save"
                 android:textColor="#FAFFFFFF"
-                android:textStyle="bold"></Button>
+                android:textStyle="bold"
+               ></Button>
 
 
         </LinearLayout>

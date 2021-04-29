@@ -34,5 +34,7 @@ interface EndPoints {
                             @Field("descricao") quarto: String,
                             @Field("foto") quinto: String,
                             @Field("id_user") sexto: Int,
-                            @Field("id_ocorrencia") setimo: Int): Call<Pontos_adicionar>
+                            @Field("id_ocorrencia") setimo: Int,
+                            @Field("imagem") oitavo:String,
+                            @Field("nomeImagem") nono:String): Call<Pontos_adicionar>
 }

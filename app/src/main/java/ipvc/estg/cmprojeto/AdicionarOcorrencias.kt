@@ -1,5 +1,6 @@
 package ipvc.estg.cmprojeto
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -34,7 +35,6 @@ import java.net.URI
 import kotlin.properties.Delegates
 import java.net.URL
 import java.util.*
-
 private lateinit var lastLocation: Location
 private lateinit var fusedLocationClient: FusedLocationProviderClient
 private lateinit var  locationCallback: LocationCallback
@@ -59,8 +59,6 @@ class AdicionarOcorrencias : AppCompatActivity() {
 
         val id_user = intent.getStringExtra("id_user")
 
-        Log.d("***AQUI", latitude.toString())
-
         image = findViewById(R.id.imagemRecebida)
 
         val spinner = findViewById<Spinner>(R.id.ocorrenciaRecebida)
@@ -75,45 +73,27 @@ class AdicionarOcorrencias : AppCompatActivity() {
 
             val imgBitmap: Bitmap = findViewById<ImageView>(R.id.imagemRecebida).drawable.toBitmap()
             val imageFile: File = convertBitmapToFile("file", imgBitmap)
-            var imageUrl = "https://cm22059.000webhostapp.com/myslim/api/imagens/" + nomeImagem
-
-
-
-            //var input: InputStream = URL(imageUrl).openStream()
-            //var myBitmap = BitmapFactory.decodeStream(input)
-            //image.setImageBitmap(myBitmap)
-
+            var imageUrl = "https://cm22059.000webhostapp.com/myslim/api/imagens/" + nomeImagem + ".JPG"
 
             val bos = ByteArrayOutputStream()
-            val pic: Bitmap = (image.drawable as BitmapDrawable).bitmap
-            pic.compress(Bitmap.CompressFormat.JPEG, 100, bos)
-            //val encodedImage: String = Base64.getEncoder().encodeToString(bos.toByteArray())
-            //Log.d("***AQUI", imageFile.toString())
-            //Log.d("***AQUI", imgBitmap.toString())
-            Log.d("***AQUI", imageUrl)
-            //Log.d("***AQUI", encodedImage)
+            val imagem: Bitmap = (image.drawable as BitmapDrawable).bitmap
+            imagem.compress(Bitmap.CompressFormat.JPEG, 100, bos)
+            val encodedImage: String = Base64.getEncoder().encodeToString(bos.toByteArray())
+
 
 
             val titulo = findViewById<EditText>(R.id.tituloRecebido).text.toString()
-            val tituloEnviar: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), titulo)
 
             val descricao = findViewById<EditText>(R.id.descricaoRecebida).text.toString()
-            val descricaoEnviar: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), descricao)
 
             val lat = intent.getParcelableExtra<LatLng>("localizacao")!!.latitude
-            val latEnviar: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), lat.toString())
 
             val long = intent.getParcelableExtra<LatLng>("localizacao")!!.longitude
-            val longEnviar: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), long.toString())
 
-            val sharedPref: SharedPreferences = getSharedPreferences(
-                getString(R.string.preference_login), Context.MODE_PRIVATE
-            )
-            //val user: Int = sharedPref.getInt(R.string.Id_LoginUser.toString(),)
-            //val userEnviar = RequestBody.create(MediaType.parse("multipart/form-data"), user.toString())
+
 
             val tipo = spinner.selectedItemId
-            val tipoEnviar = RequestBody.create(MediaType.parse("multipart/form-data"), tipo.toString())
+
 
 
             /*Log.d("***AQUI",titulo )
@@ -124,15 +104,19 @@ class AdicionarOcorrencias : AppCompatActivity() {
             Log.d("***AQUI",tipo.toString() )*/
 
             val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val call = request.adicionarOcorrencia(lat.toString(), long.toString(), titulo, descricao, imageUrl.toString(),id_user.toInt(),tipo.toInt())
+            val call = request.adicionarOcorrencia(lat.toString(), long.toString(), titulo, descricao, imageUrl.toString(),id_user.toInt(),tipo.toInt(),encodedImage,nomeImagem)
             var intent = Intent(this, MapsActivity::class.java)
+
+            Log.d("***AQUI",imgBitmap.toString() )
+            Log.d("***AQUI",encodedImage )
+
 
             call.enqueue(object : Callback<Pontos_adicionar> {
                 override fun onResponse(call: Call<Pontos_adicionar>, response: Response<Pontos_adicionar>) {
                     if (response.isSuccessful){
 
-                            Toast.makeText(this@AdicionarOcorrencias, R.string.updatesuccessful, Toast.LENGTH_SHORT).show()
-                            startActivity(intent)
+                        Toast.makeText(this@AdicionarOcorrencias, R.string.updatesuccessful, Toast.LENGTH_SHORT).show()
+                        startActivity(intent)
 
 
 
