@@ -38,4 +38,5 @@
     <string name="deletepointtitle">Apagar ponto</string>
     <string name="accidents">Acidentes</string>
     <string name="construction">Obras</string>
+    <string name="points">Pontos</string>
 </resources>
