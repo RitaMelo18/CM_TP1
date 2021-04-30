@@ -214,19 +214,18 @@
 
         <EditText
             android:id="@+id/nomeImagem"
-            android:layout_width="106dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/add_photo"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginStart="155dp"
-            android:layout_marginLeft="155dp"
-            android:layout_marginEnd="141dp"
-            android:layout_marginRight="141dp"
-            android:layout_marginBottom="166dp"
-            />
+            android:layout_marginStart="147dp"
+            android:layout_marginLeft="147dp"
+            android:layout_marginEnd="39dp"
+            android:layout_marginRight="39dp"
+            android:layout_marginBottom="162dp" />
 
     </RelativeLayout>
 
