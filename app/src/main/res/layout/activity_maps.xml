@@ -21,7 +21,7 @@
         tools:context=".MapsActivity">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/filtros"
+            android:id="@+id/filtros_aqui"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -31,7 +31,7 @@
             android:src="@drawable/ic_dehaze_black_24dp"
             app:backgroundTint="#fb8c00"
             app:tint="@android:color/white"
-
+            android:onClick="filtros"
             app:fabSize="mini"/>
 
 

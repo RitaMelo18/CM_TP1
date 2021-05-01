@@ -6,7 +6,6 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -29,9 +28,12 @@ import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.location.Location
 import android.util.Log
+import android.widget.*
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_maps.*
+import kotlinx.android.synthetic.main.filtros.*
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -44,6 +46,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var  locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
@@ -51,6 +54,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+
 
         //inicializar fusedLocationClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -237,6 +242,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+    fun filtros(view: View) {
+        var intent = Intent(this, Filtros::class.java)
+        startActivity(intent)
+    }
 
 
 }

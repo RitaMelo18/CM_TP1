@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    >
+
+    <RelativeLayout
+        android:id="@+id/filtrosShow"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="#fffafa"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/points"
+            android:layout_width="166dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/bottomBar"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="-594dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/points"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/bottomBar"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="-564dp"
+            android:layout_marginEnd="13dp"
+            android:layout_marginRight="13dp">
+
+            <RadioButton
+                android:id="@+id/Acidente"
+                android:layout_width="143dp"
+                android:layout_height="wrap_content"
+                android:text="@string/accidents"></RadioButton>
+
+            <RadioButton
+                android:id="@+id/Obras"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:text="@string/construction"></RadioButton>
+
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/distancia"
+            android:layout_width="166dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/radioGroup"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="-279dp"
+            android:layout_marginBottom="-45dp"
+            android:text="@string/distance"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup2"
+            android:layout_width="235dp"
+            android:layout_height="112dp"
+            android:layout_alignTop="@+id/bottomBar"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="-445dp"
+            android:layout_marginEnd="56dp"
+            android:layout_marginRight="56dp">
+
+            <RadioButton
+                android:id="@+id/km10"
+                android:layout_width="171dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/bottomBar"
+                android:text="@string/Distancia10km"></RadioButton>
+
+            <RadioButton
+                android:id="@+id/km5"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:text="@string/Distancia5km"></RadioButton>
+
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/bottomBar"
+            android:layout_width="172dp"
+            android:layout_height="53dp"
+            android:layout_below="@+id/utilizador"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="61dp"
+            android:layout_marginLeft="61dp"
+            android:layout_marginTop="451dp"
+            android:layout_marginEnd="62dp"
+            android:layout_marginRight="62dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/AddNote"
+            android:layout_width="206dp"
+            android:layout_height="29dp"
+            android:layout_below="@+id/radioGroup2"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="51dp"
+            android:layout_marginLeft="51dp"
+            android:layout_marginTop="133dp"
+            android:layout_marginEnd="38dp"
+            android:layout_marginRight="38dp"
+            android:layout_weight="20"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="#1D88CB"
+            android:text="@string/edit"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"></Button>
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="206dp"
+            android:layout_height="29dp"
+            android:layout_below="@+id/radioGroup2"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="47dp"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="74dp"
+            android:layout_marginEnd="42dp"
+            android:layout_marginRight="42dp"
+            android:layout_weight="20"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="#1D88CB"
+            android:text="@string/Reset"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"></Button>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

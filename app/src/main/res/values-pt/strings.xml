@@ -39,4 +39,7 @@
     <string name="accidents">Acidentes</string>
     <string name="construction">Obras</string>
     <string name="points">Pontos</string>
+    <string name="all">Todos</string>
+    <string name="distance">Distância</string>
+    <string name="Reset">Redefinir</string>
 </resources>

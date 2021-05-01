@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.textfield.TextInputEditText
 import ipvc.estg.cmprojeto.api.EndPoints
 import ipvc.estg.cmprojeto.api.OutputPost
@@ -115,5 +116,7 @@ class MainActivity : AppCompatActivity() {
         var intent = Intent(this, map::class.java)
         startActivity(intent)
     }
+
+
 
 }

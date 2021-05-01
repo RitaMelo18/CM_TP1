@@ -17,8 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AdicionarOcorrencias"
-            android:parentActivityName=".map"></activity>
+        <activity android:name=".Filtros"
+            android:parentActivityName=".map" ></activity>
+        <activity
+            android:name=".AdicionarOcorrencias"
+            android:parentActivityName=".map" />
         <activity
             android:name=".Editar_eliminarPontos"
             android:parentActivityName=".map" />
