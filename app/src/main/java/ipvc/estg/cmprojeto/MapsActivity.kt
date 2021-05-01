@@ -340,7 +340,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             })
         }
-        val botao2 = findViewById<FloatingActionButton>(R.id.Acidente3)
         val botaosuperior = findViewById<FloatingActionButton>(R.id.fab3)
         botaosuperior.setOnClickListener {
             onAddButtonClicked()
