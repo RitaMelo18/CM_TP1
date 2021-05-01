@@ -30,9 +30,13 @@ import android.location.Location
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import com.google.android.gms.location.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_maps.*
 import kotlinx.android.synthetic.main.filtros.*
@@ -48,6 +52,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var  locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
 
+    private var clicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,7 +114,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
-        val acidentes = findViewById<RadioButton>(R.id.Acidente2)
+        val acidentes = findViewById<FloatingActionButton>(R.id.Acidente3)
         acidentes.setOnClickListener {
             mMap.clear()
 
@@ -154,7 +159,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             })
         }
-        val obras = findViewById<RadioButton>(R.id.Obras2)
+        val obras = findViewById<FloatingActionButton>(R.id.Obras3)
         obras.setOnClickListener {
             mMap.clear()
 
@@ -332,10 +337,33 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             })
         }
+        val botao2 = findViewById<FloatingActionButton>(R.id.Acidente3)
+        val botaosuperior = findViewById<FloatingActionButton>(R.id.fab3)
+        botaosuperior.setOnClickListener {
+            onAddButtonClicked()
+        }
+
         createLocationRequest()
 
-
     }
+
+    private fun onAddButtonClicked(){
+        setVisibility(clicked)
+        clicked = !clicked
+    }
+
+    private fun setVisibility(clicked: Boolean){
+        val botao2 = findViewById<FloatingActionButton>(R.id.Acidente3)
+        val botao3 = findViewById<FloatingActionButton>(R.id.Obras3)
+        if(!clicked){
+            botao2.visibility=View.VISIBLE
+            botao3.visibility=View.VISIBLE
+        } else {
+            botao2.visibility=View.INVISIBLE
+            botao3.visibility=View.INVISIBLE
+        }
+    }
+
 
     fun calculateDistance(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Float {
         val results = FloatArray(1)
