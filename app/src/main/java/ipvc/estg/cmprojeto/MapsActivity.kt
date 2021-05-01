@@ -204,7 +204,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             })
         }
-        val all = findViewById<RadioButton>(R.id.All)
+
+        //Repor dados do mapa
+        val all = findViewById<FloatingActionButton>(R.id.Todos)
         all.setOnClickListener {
             mMap.clear()
             val request = ServiceBuilder.buildService(EndPoints::class.java)
@@ -245,8 +247,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             })
         }
-
-        val km5 = findViewById<RadioButton>(R.id.km2)
+        //Até 5km
+        val km5 = findViewById<FloatingActionButton>(R.id.Distancia5km)
         km5.setOnClickListener {
             mMap.clear()
             val request = ServiceBuilder.buildService(EndPoints::class.java)
@@ -292,7 +294,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             })
         }
 
-        val km10 = findViewById<RadioButton>(R.id.km5)
+        //Até 10km
+        val km10 = findViewById<FloatingActionButton>(R.id.Distancia10km)
         km10.setOnClickListener {
             mMap.clear()
             val request = ServiceBuilder.buildService(EndPoints::class.java)
@@ -355,12 +358,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun setVisibility(clicked: Boolean){
         val botao2 = findViewById<FloatingActionButton>(R.id.Acidente3)
         val botao3 = findViewById<FloatingActionButton>(R.id.Obras3)
+        val distancia5 = findViewById<FloatingActionButton>(R.id.Distancia5km)
+        val distancia10 = findViewById<FloatingActionButton>(R.id.Distancia10km)
+        val repor = findViewById<FloatingActionButton>(R.id.Todos)
         if(!clicked){
             botao2.visibility=View.VISIBLE
             botao3.visibility=View.VISIBLE
+            distancia5.visibility=View.VISIBLE
+            distancia10.visibility=View.VISIBLE
+            repor.visibility=View.VISIBLE
         } else {
             botao2.visibility=View.INVISIBLE
             botao3.visibility=View.INVISIBLE
+            distancia5.visibility=View.INVISIBLE
+            distancia10.visibility=View.INVISIBLE
+            repor.visibility=View.INVISIBLE
         }
     }
 

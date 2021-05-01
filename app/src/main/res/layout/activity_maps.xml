@@ -74,61 +74,45 @@
             android:layout_marginBottom="24dp"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_warning_black_24dp"
+            android:src="@drawable/km5"
             app:backgroundTint="#fb8c00"
             app:tint="@android:color/white"
-            app:layout_constraintTop_toTopOf="@+id/Acidente3"
+            app:layout_constraintTop_toTopOf="@+id/Obras3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:fabSize="mini"
+            android:visibility="invisible"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/Distancia10km"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/km10"
+            app:backgroundTint="#fb8c00"
+            app:tint="@android:color/white"
+            app:layout_constraintTop_toTopOf="@+id/Distancia5km"
+            app:layout_constraintStart_toStartOf="parent"
+            app:fabSize="mini"
+            android:visibility="invisible"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/Todos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_refresh_black_24dp"
+            app:backgroundTint="#fb8c00"
+            app:tint="@android:color/white"
+            app:layout_constraintTop_toTopOf="@+id/Distancia10km"
             app:layout_constraintStart_toStartOf="parent"
             app:fabSize="mini"
             android:visibility="invisible"/>
 
 
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:background="#FFF"
-            android:layout_alignTop="@+id/bottomBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginEnd="13dp"
-            android:layout_marginRight="13dp">
-
-
-
-            <RadioButton
-                android:id="@+id/km2"
-                android:layout_width="143dp"
-                android:layout_height="wrap_content"
-                android:text="@string/Distancia2km"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                ></RadioButton>
-
-            <RadioButton
-                android:id="@+id/km5"
-                android:layout_width="145dp"
-                android:layout_height="wrap_content"
-                android:text="@string/Distancia5km"
-                android:textStyle="bold"
-                android:textSize="16sp"></RadioButton>
-
-            <RadioButton
-                android:id="@+id/All"
-                android:layout_width="145dp"
-                android:layout_height="wrap_content"
-                android:text="@string/all"
-                android:textStyle="bold"
-                android:textSize="16sp"></RadioButton>
-
-
-        </RadioGroup>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
