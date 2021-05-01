@@ -96,7 +96,7 @@
                 android:layout_width="171dp"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/bottomBar"
-                android:text="@string/Distancia10km"></RadioButton>
+                android:text="@string/Distancia2km"></RadioButton>
 
             <RadioButton
                 android:id="@+id/km5"

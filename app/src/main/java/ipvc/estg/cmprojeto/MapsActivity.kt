@@ -201,6 +201,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         val all = findViewById<RadioButton>(R.id.All)
         all.setOnClickListener {
+            mMap.clear()
             val request = ServiceBuilder.buildService(EndPoints::class.java)
             val call = request.getPontos()
             var position: LatLng
@@ -240,10 +241,107 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             })
         }
 
+        val km5 = findViewById<RadioButton>(R.id.km2)
+        km5.setOnClickListener {
+            mMap.clear()
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call = request.getPontos()
+            var position: LatLng
+            val sharedPref: SharedPreferences = getSharedPreferences(
+                getString(R.string.preference_login), Context.MODE_PRIVATE
+            )
 
+            call.enqueue(object : Callback<List<Pontos>>{
+                override fun onResponse(call: Call<List<Pontos>>, response: Response<List<Pontos>>) {
+                    if (response.isSuccessful){
+                        pontos = response.body()!!
+                        for(ponto in pontos){
+                            val distancia = calculateDistance(ponto.latitude.toDouble(), ponto.longitude.toDouble(),lastLocation.latitude, lastLocation.longitude)
+                            position = LatLng(ponto.latitude.toString().toDouble(), ponto.longitude.toString().toDouble())
+                            if(distancia < 500){
+                                if (ponto.id_user.equals(sharedPref.all[getString(R.string.Id_LoginUser)])){
+
+                                    mMap.addMarker(MarkerOptions()
+                                        .position(position)
+                                        .title(ponto.nome)
+                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble() )
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+
+                                    )
+                                }else {
+                                    mMap.addMarker(
+                                        MarkerOptions()
+                                            .position(position)
+                                            .title(ponto.nome)
+                                            .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble())
+                                    )
+                                }
+                            }
+
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<List<Pontos>>, t: Throwable) {
+                    Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
+        val km10 = findViewById<RadioButton>(R.id.km5)
+        km10.setOnClickListener {
+            mMap.clear()
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call = request.getPontos()
+            var position: LatLng
+            val sharedPref: SharedPreferences = getSharedPreferences(
+                getString(R.string.preference_login), Context.MODE_PRIVATE
+            )
+
+            call.enqueue(object : Callback<List<Pontos>>{
+                override fun onResponse(call: Call<List<Pontos>>, response: Response<List<Pontos>>) {
+                    if (response.isSuccessful){
+                        pontos = response.body()!!
+                        for(ponto in pontos){
+                            val distancia = calculateDistance(ponto.latitude.toDouble(), ponto.longitude.toDouble(),lastLocation.latitude, lastLocation.longitude)
+                            position = LatLng(ponto.latitude.toString().toDouble(), ponto.longitude.toString().toDouble())
+                            if(distancia < 5000){
+                                if (ponto.id_user.equals(sharedPref.all[getString(R.string.Id_LoginUser)])){
+
+                                    mMap.addMarker(MarkerOptions()
+                                        .position(position)
+                                        .title(ponto.nome)
+                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble() )
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+
+                                    )
+                                }else {
+                                    mMap.addMarker(
+                                        MarkerOptions()
+                                            .position(position)
+                                            .title(ponto.nome)
+                                            .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble())
+                                    )
+                                }
+                            }
+
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<List<Pontos>>, t: Throwable) {
+                    Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
         createLocationRequest()
 
 
+    }
+
+    fun calculateDistance(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Float {
+        val results = FloatArray(1)
+        Location.distanceBetween(lat1, lng1, lat2, lng2, results)
+        // distance in meter
+        return results[0]
     }
 
     /**

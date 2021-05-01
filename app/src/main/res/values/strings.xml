@@ -52,7 +52,7 @@
     <string name="all">All</string>
     <string name="distance">Distance</string>
     <string name="Distancia5km" translatable="false">5 km</string>
-    <string name="Distancia10km" translatable="false"> 10 km</string>
+    <string name="Distancia2km" translatable="false">500 m</string>
     <string name="Reset">Reset</string>
 
 </resources>
