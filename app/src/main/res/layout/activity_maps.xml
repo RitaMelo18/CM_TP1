@@ -20,19 +20,51 @@
         android:layout_height="match_parent"
         tools:context=".MapsActivity">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/filtros_aqui"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:background="#FFF"
+            android:layout_alignTop="@+id/bottomBar"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/ic_dehaze_black_24dp"
-            app:backgroundTint="#fb8c00"
-            app:tint="@android:color/white"
-            android:onClick="filtros"
-            app:fabSize="mini"/>
+            android:layout_marginTop="-564dp"
+            android:layout_marginEnd="13dp"
+            android:layout_marginRight="13dp">
+
+            <RadioButton
+                android:id="@+id/Acidente2"
+                android:layout_width="143dp"
+                android:layout_height="wrap_content"
+                android:text="@string/accidents"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                ></RadioButton>
+
+            <RadioButton
+                android:id="@+id/Obras2"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:text="@string/construction"
+                android:textStyle="bold"
+                android:textSize="16sp"></RadioButton>
+
+            <RadioButton
+                android:id="@+id/All"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:text="@string/all"
+                android:textStyle="bold"
+                android:textSize="16sp"></RadioButton>
+
+
+        </RadioGroup>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

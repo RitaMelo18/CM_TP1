@@ -147,7 +147,8 @@
             android:backgroundTint="#1D88CB"
             android:text="@string/edit"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"></Button>
+            android:textStyle="bold"
+            android:onClick="aplicarfiltros"></Button>
 
         <Button
             android:id="@+id/reset"
@@ -168,7 +169,8 @@
             android:backgroundTint="#1D88CB"
             android:text="@string/Reset"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"></Button>
+            android:textStyle="bold"
+            android:onClick="redefinir"></Button>
 
 
     </RelativeLayout>

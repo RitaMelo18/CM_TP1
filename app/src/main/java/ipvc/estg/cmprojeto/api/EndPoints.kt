@@ -37,4 +37,8 @@ interface EndPoints {
                             @Field("id_ocorrencia") setimo: Int,
                             @Field("imagem") oitavo:String,
                             @Field("nomeImagem") nono:String): Call<Pontos_adicionar>
+
+    @FormUrlEncoded
+    @POST("/myslim/api/pontos/filtros")
+    fun filtrosOcorrencias(@Field("id") first: Int): Call<List<Pontos>>
 }

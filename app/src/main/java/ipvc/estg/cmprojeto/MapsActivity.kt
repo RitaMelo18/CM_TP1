@@ -28,6 +28,8 @@ import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.location.Location
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
@@ -54,7 +56,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
 
 
         //inicializar fusedLocationClient
@@ -108,7 +109,141 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
+        val acidentes = findViewById<RadioButton>(R.id.Acidente2)
+        acidentes.setOnClickListener {
+            mMap.clear()
+
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call = request.filtrosOcorrencias(1)
+            var position: LatLng
+            val sharedPref: SharedPreferences = getSharedPreferences(
+                getString(R.string.preference_login), Context.MODE_PRIVATE
+            )
+
+            call.enqueue(object : Callback<List<Pontos>> {
+                override fun onResponse(call: Call<List<Pontos>>, response: Response<List<Pontos>>) {
+                    if (response.isSuccessful){
+                        pontos = response.body()!!
+                        for(ponto in pontos){
+                            position = LatLng(ponto.latitude.toString().toDouble(), ponto.longitude.toString().toDouble())
+                            if (ponto.id_user.equals(sharedPref.all[getString(R.string.Id_LoginUser)])){
+
+                                mMap.addMarker(
+                                    MarkerOptions()
+                                        .position(position)
+                                        .title(ponto.nome)
+                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble() )
+                                        .icon(
+                                            BitmapDescriptorFactory.defaultMarker(
+                                                BitmapDescriptorFactory.HUE_AZURE))
+
+                                )
+                            }else {
+                                mMap.addMarker(
+                                    MarkerOptions()
+                                        .position(position)
+                                        .title(ponto.nome)
+                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble())
+                                )
+                            }
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<List<Pontos>>, t: Throwable) {
+                    Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+        val obras = findViewById<RadioButton>(R.id.Obras2)
+        obras.setOnClickListener {
+            mMap.clear()
+
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call = request.filtrosOcorrencias(2)
+            var position: LatLng
+            val sharedPref: SharedPreferences = getSharedPreferences(
+                getString(R.string.preference_login), Context.MODE_PRIVATE
+            )
+
+            call.enqueue(object : Callback<List<Pontos>> {
+                override fun onResponse(call: Call<List<Pontos>>, response: Response<List<Pontos>>) {
+                    if (response.isSuccessful){
+                        pontos = response.body()!!
+                        for(ponto in pontos){
+                            position = LatLng(ponto.latitude.toString().toDouble(), ponto.longitude.toString().toDouble())
+                            if (ponto.id_user.equals(sharedPref.all[getString(R.string.Id_LoginUser)])){
+
+                                mMap.addMarker(
+                                    MarkerOptions()
+                                        .position(position)
+                                        .title(ponto.nome)
+                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble() )
+                                        .icon(
+                                            BitmapDescriptorFactory.defaultMarker(
+                                                BitmapDescriptorFactory.HUE_AZURE))
+
+                                )
+                            }else {
+                                mMap.addMarker(
+                                    MarkerOptions()
+                                        .position(position)
+                                        .title(ponto.nome)
+                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble())
+                                )
+                            }
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<List<Pontos>>, t: Throwable) {
+                    Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+        val all = findViewById<RadioButton>(R.id.All)
+        all.setOnClickListener {
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call = request.getPontos()
+            var position: LatLng
+            val sharedPref: SharedPreferences = getSharedPreferences(
+                getString(R.string.preference_login), Context.MODE_PRIVATE
+            )
+
+            call.enqueue(object : Callback<List<Pontos>>{
+                override fun onResponse(call: Call<List<Pontos>>, response: Response<List<Pontos>>) {
+                    if (response.isSuccessful){
+                        pontos = response.body()!!
+                        for(ponto in pontos){
+                            position = LatLng(ponto.latitude.toString().toDouble(), ponto.longitude.toString().toDouble())
+                            if (ponto.id_user.equals(sharedPref.all[getString(R.string.Id_LoginUser)])){
+
+                                mMap.addMarker(MarkerOptions()
+                                    .position(position)
+                                    .title(ponto.nome)
+                                    .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble() )
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+
+                                )
+                            }else {
+                                mMap.addMarker(
+                                    MarkerOptions()
+                                        .position(position)
+                                        .title(ponto.nome)
+                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble())
+                                )
+                            }
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<List<Pontos>>, t: Throwable) {
+                    Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
+
         createLocationRequest()
+
+
     }
 
     /**
@@ -247,5 +382,54 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         startActivity(intent)
     }
 
+    fun filtrosMapa(view: View){
+        val acidentes = findViewById<RadioButton>(R.id.Acidente)
+        acidentes.setOnClickListener {
+            mMap.clear()
+
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call = request.filtrosOcorrencias(1)
+            var position: LatLng
+            val sharedPref: SharedPreferences = getSharedPreferences(
+                getString(R.string.preference_login), Context.MODE_PRIVATE
+            )
+
+            call.enqueue(object : Callback<List<Pontos>> {
+                override fun onResponse(call: Call<List<Pontos>>, response: Response<List<Pontos>>) {
+                    if (response.isSuccessful){
+                        pontos = response.body()!!
+                        for(ponto in pontos){
+                            position = LatLng(ponto.latitude.toString().toDouble(), ponto.longitude.toString().toDouble())
+                            if (ponto.id_user.equals(sharedPref.all[getString(R.string.Id_LoginUser)])){
+
+                                mMap.addMarker(
+                                    MarkerOptions()
+                                        .position(position)
+                                        .title(ponto.nome)
+                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble() )
+                                        .icon(
+                                            BitmapDescriptorFactory.defaultMarker(
+                                                BitmapDescriptorFactory.HUE_AZURE))
+
+                                )
+                            }else {
+                                mMap.addMarker(
+                                    MarkerOptions()
+                                        .position(position)
+                                        .title(ponto.nome)
+                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble())
+                                )
+                            }
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<List<Pontos>>, t: Throwable) {
+                    Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
+
+    }
 
 }
