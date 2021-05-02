@@ -42,4 +42,8 @@
     <string name="all">Todos</string>
     <string name="distance">Distância</string>
     <string name="Reset">Redefinir</string>
+    <string name="selectType">Inserir o tipo de ocorrência</string>
+    <string name="Insertimagename">Insira o nome da imagem</string>
+    <string name="selectImage">Selecione uma imagem</string>
+    <string name="errorInsert">Erro ao inserir</string>
 </resources>

@@ -35,14 +35,10 @@ import java.net.URI
 import kotlin.properties.Delegates
 import java.net.URL
 import java.util.*
-private lateinit var lastLocation: Location
-private lateinit var fusedLocationClient: FusedLocationProviderClient
-private lateinit var  locationCallback: LocationCallback
-private lateinit var locationRequest: LocationRequest
+
 val REQUEST_CODE = 1
 private lateinit var image: ImageView
-private var imageUri: Uri? = null
-private lateinit var imagemLink: String
+
 
 
 class AdicionarOcorrencias : AppCompatActivity() {
@@ -76,52 +72,76 @@ class AdicionarOcorrencias : AppCompatActivity() {
             val long = intent.getParcelableExtra<LatLng>("localizacao")!!.longitude
 
             //Título inserido
-            val titulo = findViewById<EditText>(R.id.tituloRecebido).text.toString()
+            val titulo = findViewById<EditText>(R.id.tituloRecebido)
 
             //Descrição inserida
-            val descricao = findViewById<EditText>(R.id.descricaoRecebida).text.toString()
+            val descricao = findViewById<EditText>(R.id.descricaoRecebida)
 
             //Tipo de ocorrência selecionado
             val tipo = spinner.selectedItemId
 
             //Nome da imagem inserido
-            val nomeImagem = findViewById<EditText>(R.id.nomeImagem).text.toString()
-
-            //URL da imagem (webhost)
-            var imageUrl = "https://cm22059.000webhostapp.com/myslim/api/imagens/" + nomeImagem + ".JPG"
-
-            //Codificar imagem em base 64
-            val bos = ByteArrayOutputStream()
-            val imagem: Bitmap = (image.drawable as BitmapDrawable).bitmap
-            imagem.compress(Bitmap.CompressFormat.JPEG, 100, bos)
-            val encodedImage: String = Base64.getEncoder().encodeToString(bos.toByteArray())
+            val nomeImagem = findViewById<EditText>(R.id.nomeImagem)
 
 
-            val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val call = request.adicionarOcorrencia(lat.toString(), long.toString(), titulo, descricao, imageUrl.toString(),id_user.toInt(),tipo.toInt(),encodedImage,nomeImagem)
-            var intent = Intent(this, MapsActivity::class.java)
+            //Validações
+            if(titulo.text.isNullOrEmpty() || descricao.text.isNullOrEmpty() ||tipo.toString().equals("0") || nomeImagem.text.isNullOrEmpty()){
+                if(titulo.text.isNullOrEmpty()){
+                    titulo.error = getString(R.string.titlebox)
+                }
+                if(descricao.text.isNullOrEmpty()){
+                    descricao.error = getString(R.string.descriptionbox)
+                    Log.d("***AQUI", tipo.toString())
+
+                }
+                if (tipo.toString().equals("0")){
+                    Toast.makeText(this@AdicionarOcorrencias, R.string.selectType, Toast.LENGTH_SHORT).show()
+                }
+                if (nomeImagem.text.isNullOrEmpty()){
+                    nomeImagem.error = getString(R.string.Insertimagename)
+                }
+
+            } else {
+
+                //URL da imagem (webhost)
+                var imageUrl = "https://cm22059.000webhostapp.com/myslim/api/imagens/" + nomeImagem.text.toString() + ".JPG"
+
+                //Codificar imagem em base 64
+                val bos = ByteArrayOutputStream()
+                val imagem: Bitmap = (image.drawable as BitmapDrawable).bitmap
+                imagem.compress(Bitmap.CompressFormat.JPEG, 100, bos)
+                val encodedImage: String = Base64.getEncoder().encodeToString(bos.toByteArray())
 
 
-            Log.d("***AQUI",encodedImage )
+                val request = ServiceBuilder.buildService(EndPoints::class.java)
+                val call = request.adicionarOcorrencia(lat.toString(), long.toString(), titulo.text.toString(), descricao.text.toString(), imageUrl.toString(),id_user.toInt(),tipo.toInt(),encodedImage,nomeImagem.text.toString())
+                var intent = Intent(this, MapsActivity::class.java)
 
 
-            call.enqueue(object : Callback<Pontos_adicionar> {
-                override fun onResponse(call: Call<Pontos_adicionar>, response: Response<Pontos_adicionar>) {
-                    if (response.isSuccessful){
-
-                        Toast.makeText(this@AdicionarOcorrencias, R.string.updatesuccessful, Toast.LENGTH_SHORT).show()
-                        startActivity(intent)
+                Log.d("***AQUI",encodedImage )
 
 
-                    } else {
-                        Toast.makeText(this@AdicionarOcorrencias, R.string.ErrorupdatePoint, Toast.LENGTH_SHORT).show()
+                call.enqueue(object : Callback<Pontos_adicionar> {
+                    override fun onResponse(call: Call<Pontos_adicionar>, response: Response<Pontos_adicionar>) {
+                        if (response.isSuccessful){
+
+                            Toast.makeText(this@AdicionarOcorrencias, R.string.updatesuccessful, Toast.LENGTH_SHORT).show()
+                            startActivity(intent)
+
+
+                        } else {
+                            Toast.makeText(this@AdicionarOcorrencias, R.string.ErrorupdatePoint, Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<Pontos_adicionar>, t: Throwable) {
-                    //Toast.makeText(this@Editar_eliminarPontos, "${t.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
+                    override fun onFailure(call: Call<Pontos_adicionar>, t: Throwable) {
+                        //Toast.makeText(this@Editar_eliminarPontos, "${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
+
+            }
+
+
 
         }
 
