@@ -265,7 +265,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         for(ponto in pontos){
                             val distancia = calculateDistance(ponto.latitude.toDouble(), ponto.longitude.toDouble(),lastLocation.latitude, lastLocation.longitude)
                             position = LatLng(ponto.latitude.toString().toDouble(), ponto.longitude.toString().toDouble())
-                            if(distancia < 500){
+                            if(distancia < 5000){
                                 if (ponto.id_user.equals(sharedPref.all[getString(R.string.Id_LoginUser)])){
 
                                     mMap.addMarker(MarkerOptions()
@@ -312,7 +312,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         for(ponto in pontos){
                             val distancia = calculateDistance(ponto.latitude.toDouble(), ponto.longitude.toDouble(),lastLocation.latitude, lastLocation.longitude)
                             position = LatLng(ponto.latitude.toString().toDouble(), ponto.longitude.toString().toDouble())
-                            if(distancia < 5000){
+                            if(distancia < 10000){
                                 if (ponto.id_user.equals(sharedPref.all[getString(R.string.Id_LoginUser)])){
 
                                     mMap.addMarker(MarkerOptions()
