@@ -83,6 +83,7 @@ class Editar_eliminarPontos : AppCompatActivity() {
         val tituloEditado = findViewById<EditText>(R.id.tituloMarker)
         val descricaoEditada = findViewById<EditText>(R.id.descricaoMarker)
 
+
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.editarOcorrencia(id,tituloEditado.text.toString(),descricaoEditada.text.toString())
         var intent2 = Intent(this, MapsActivity::class.java)

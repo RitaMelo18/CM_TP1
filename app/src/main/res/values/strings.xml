@@ -58,5 +58,7 @@
     <string name="Insertimagename">Insert image name</string>
     <string name="selectImage">Select an image</string>
     <string name="errorInsert">Error to insert</string>
+    <string name="Insertpoint">Insert Point</string>
+    <string name="EditPoint">Edit/Delete Point</string>
 
 </resources>

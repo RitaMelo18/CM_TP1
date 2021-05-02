@@ -46,4 +46,6 @@
     <string name="Insertimagename">Insira o nome da imagem</string>
     <string name="selectImage">Selecione uma imagem</string>
     <string name="errorInsert">Erro ao inserir</string>
+    <string name="Insertpoint">Inserir Ponto</string>
+    <string name="EditPoint">Editar/Eliminar Ponto</string>
 </resources>

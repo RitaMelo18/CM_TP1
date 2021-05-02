@@ -21,10 +21,12 @@
             android:parentActivityName=".map" ></activity>
         <activity
             android:name=".AdicionarOcorrencias"
-            android:parentActivityName=".map" />
+            android:parentActivityName=".map"
+            android:label="@string/Insertpoint"/>
         <activity
             android:name=".Editar_eliminarPontos"
-            android:parentActivityName=".map" />
+            android:parentActivityName=".map"
+            android:label="@string/EditPoint"/>
         <activity android:name=".Markerwindow" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
