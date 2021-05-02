@@ -35,8 +35,8 @@
     <string name="typeOcurrencie">Type Occurrence</string>
     <string name="image">Image</string>
     <string name="ErrorupdatePoint">Error to update</string>
-    <string name="updatesuccessful">Update Sucessful!</string>
-    <string name="deletesucessful">Delete Sucessful!</string>
+    <string name="updatesuccessful">Update Successfully!</string>
+    <string name="deletesucessful">Delete Successfully!</string>
     <string name="Errordelete">Error to delete</string>
     <string name="DeletePoint">Are you sure you want to delete this point?</string>
     <string name="deletepointtitle">Delete point</string>
@@ -60,5 +60,7 @@
     <string name="errorInsert">Error to insert</string>
     <string name="Insertpoint">Insert Point</string>
     <string name="EditPoint">Edit/Delete Point</string>
+    <string name="savedsucessfull">Saved Successfully!</string>
+    <string name="errorSave">Error to Save</string>
 
 </resources>

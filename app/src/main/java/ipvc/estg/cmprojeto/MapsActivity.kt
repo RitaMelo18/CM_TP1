@@ -76,6 +76,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
+        //Listar pontos no mapa
+
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getPontos()
         var position: LatLng
@@ -114,6 +116,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
+        //Filtrar pontos por acidentes
         val acidentes = findViewById<FloatingActionButton>(R.id.Acidente3)
         acidentes.setOnClickListener {
             mMap.clear()
@@ -159,6 +162,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             })
         }
+
+        //Filtrar pontos por obras
         val obras = findViewById<FloatingActionButton>(R.id.Obras3)
         obras.setOnClickListener {
             mMap.clear()
@@ -205,7 +210,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             })
         }
 
-        //Repor dados do mapa
+        //Repor dados iniciais do mapa
         val all = findViewById<FloatingActionButton>(R.id.Todos)
         all.setOnClickListener {
             mMap.clear()
@@ -247,7 +252,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             })
         }
-        //Até 5km
+        //Filtrar pontos até 5km de distância
         val km5 = findViewById<FloatingActionButton>(R.id.Distancia5km)
         km5.setOnClickListener {
             mMap.clear()
@@ -294,7 +299,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             })
         }
 
-        //Até 10km
+        //Filtrar pontos até 10km de distância
         val km10 = findViewById<FloatingActionButton>(R.id.Distancia10km)
         km10.setOnClickListener {
             mMap.clear()
@@ -340,6 +345,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             })
         }
+
+        //Quando o botão dos filtros é carregado
         val botaosuperior = findViewById<FloatingActionButton>(R.id.fab3)
         botaosuperior.setOnClickListener {
             onAddButtonClicked()
@@ -349,11 +356,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+    //Quando o botão dos filtros é carregado invoca o setVisibility e muda o clicked para true ou false
     private fun onAddButtonClicked(){
         setVisibility(clicked)
         clicked = !clicked
     }
 
+    //Conforme a resposta do onAddButtonClicked põe os botões visiveis ou invisiveis
     private fun setVisibility(clicked: Boolean){
         val botao2 = findViewById<FloatingActionButton>(R.id.Acidente3)
         val botao3 = findViewById<FloatingActionButton>(R.id.Obras3)
@@ -375,7 +384,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-
+    //Calcular a distância entre dois pontos
     fun calculateDistance(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Float {
         val results = FloatArray(1)
         Location.distanceBetween(lat1, lng1, lat2, lng2, results)
@@ -402,9 +411,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         /* mMap.moveCamera(CameraUpdateFactory.newLatLng(zone))*/
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(zone, zoomLevel))
+
+        //Passar a informação quando a marker window é clicada
         mMap.setInfoWindowAdapter(Markerwindow(this))
 
-        //Passar a informação quando a InfoWindow é clicada
+        //Passar a informação para a página de editar/eliminar pontos
         mMap.setOnInfoWindowClickListener { marker ->
             val intent = Intent(this, Editar_eliminarPontos::class.java).apply{
                 putExtra("Título", marker.title)
@@ -464,7 +475,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         Log.d("***AQUI", "onResume - startLocationUpdates")
     }
 
-
+    //Botão de logout
     fun logout(view: View) {
 
         val builder = AlertDialog.Builder(this)
@@ -491,11 +502,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
-    override fun onBackPressed() {
-        //nothing
-        Toast.makeText(this@MapsActivity, R.string.Back, Toast.LENGTH_SHORT).show()
-    }
-
+    //Botão de adicionar ponto
     fun adicionarOcorrencia(view: View) {
 
         //Abrir o shared preferences
@@ -505,6 +512,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //Utilizador com sessão iniciada
         var idUtilizadorLogado = sharedPref.all[getString(R.string.Id_LoginUser)]
 
+        //Enviar dados para a página
         val intent = Intent(this, AdicionarOcorrencias::class.java).apply {
             putExtra("id_user", idUtilizadorLogado.toString())
             putExtra("localizacao", LatLng(lastLocation.latitude, lastLocation.longitude))
@@ -514,59 +522,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
-    fun filtros(view: View) {
-        var intent = Intent(this, Filtros::class.java)
-        startActivity(intent)
-    }
-
-    fun filtrosMapa(view: View){
-        val acidentes = findViewById<RadioButton>(R.id.Acidente)
-        acidentes.setOnClickListener {
-            mMap.clear()
-
-            val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val call = request.filtrosOcorrencias(1)
-            var position: LatLng
-            val sharedPref: SharedPreferences = getSharedPreferences(
-                getString(R.string.preference_login), Context.MODE_PRIVATE
-            )
-
-            call.enqueue(object : Callback<List<Pontos>> {
-                override fun onResponse(call: Call<List<Pontos>>, response: Response<List<Pontos>>) {
-                    if (response.isSuccessful){
-                        pontos = response.body()!!
-                        for(ponto in pontos){
-                            position = LatLng(ponto.latitude.toString().toDouble(), ponto.longitude.toString().toDouble())
-                            if (ponto.id_user.equals(sharedPref.all[getString(R.string.Id_LoginUser)])){
-
-                                mMap.addMarker(
-                                    MarkerOptions()
-                                        .position(position)
-                                        .title(ponto.nome)
-                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble() )
-                                        .icon(
-                                            BitmapDescriptorFactory.defaultMarker(
-                                                BitmapDescriptorFactory.HUE_AZURE))
-
-                                )
-                            }else {
-                                mMap.addMarker(
-                                    MarkerOptions()
-                                        .position(position)
-                                        .title(ponto.nome)
-                                        .snippet(ponto.descricao + "+" + ponto.foto + "+" + ponto.id_user + "+" + sharedPref.all[getString(R.string.Id_LoginUser)].toString() + "+" + ponto.id_ocorrencia + "+" + ponto.id + "+" + ponto.latitude.toString().toDouble() + "+" +ponto.longitude.toString().toDouble())
-                                )
-                            }
-                        }
-                    }
-                }
-                override fun onFailure(call: Call<List<Pontos>>, t: Throwable) {
-                    Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
-        }
-
-
+    //Navegação da app, não permite recuar
+    override fun onBackPressed() {
+        Toast.makeText(this@MapsActivity, R.string.Back, Toast.LENGTH_SHORT).show()
     }
 
 }

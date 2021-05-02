@@ -61,7 +61,7 @@ class AdicionarOcorrencias : AppCompatActivity() {
         spinner.adapter = adapter
         val button = findViewById<Button>(R.id.addOcorrencia)
 
-        //Quando o botão editar é carregado
+        //Quando o botão é carregado
         button.setOnClickListener {
 
             //Localização - as últimas coordenas recebidas no MapsActivity são enviadas para esta atividade assim q a atividade é aberta
@@ -106,7 +106,7 @@ class AdicionarOcorrencias : AppCompatActivity() {
                 //URL da imagem (webhost)
                 var imageUrl = "https://cm22059.000webhostapp.com/myslim/api/imagens/" + nomeImagem.text.toString() + ".JPG"
 
-                //Codificar imagem em base 64
+                //Codificar imagem
                 val bos = ByteArrayOutputStream()
                 val imagem: Bitmap = (image.drawable as BitmapDrawable).bitmap
                 imagem.compress(Bitmap.CompressFormat.JPEG, 100, bos)
@@ -125,12 +125,12 @@ class AdicionarOcorrencias : AppCompatActivity() {
                     override fun onResponse(call: Call<Pontos_adicionar>, response: Response<Pontos_adicionar>) {
                         if (response.isSuccessful){
 
-                            Toast.makeText(this@AdicionarOcorrencias, R.string.updatesuccessful, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@AdicionarOcorrencias, R.string.savedsucessfull, Toast.LENGTH_SHORT).show()
                             startActivity(intent)
 
 
                         } else {
-                            Toast.makeText(this@AdicionarOcorrencias, R.string.ErrorupdatePoint, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@AdicionarOcorrencias, R.string.errorSave, Toast.LENGTH_SHORT).show()
                         }
                     }
 
